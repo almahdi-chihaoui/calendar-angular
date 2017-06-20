@@ -4,10 +4,12 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 
 import { AppComponent } from './app.component';
+import { LimitNameCharPipe } from './limit-name-char.pipe';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    LimitNameCharPipe
   ],
   imports: [
     BrowserModule,

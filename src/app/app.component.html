@@ -1,3 +1,48 @@
-<h1>
-  {{title}}
-</h1>
+<div id="week-view" *ngIf="weekView">
+
+    <div class="calendar-nav-bar">
+        <div class="prev-btn" (click)="prevWeekBtnClicked()"> < </div>
+        <div class="month-name">{{monthsOfYear[watchedMonth] | limitNameChar : limitMonthNameChar}}{{' ' + watchedYear}}</div>
+        <div class="next-btn" (click)="nextWeekBtnClicked()"> > </div>
+        <!--<div id="year">{{currentYear}}</div>-->
+    </div>
+
+    <div class="calendar-header">
+        <div class="day-name" *ngFor="let day of daysOfWeek">{{day |
+            limitNameChar : limitDayNameChar}}
+        </div>
+    </div>
+
+    <div class="week-line">
+        <div class="day" *ngFor="let day of month[watchedWeek]" (click)="selectDay(day)" [ngClass] = "{'today': day.todayDate, 'selected': day.isSelected}">{{day.dayDate + '/' + (day.dayMonth + 1)}}
+            <div class="events-badge">5</div>
+        </div>
+    </div>
+
+
+</div>
+
+
+
+
+<div id="month-view" *ngIf="monthView">
+    <div class="calendar-nav-bar">
+        <div class="prev-btn" (click)="prevMonthBtnClicked()"> < </div>
+        <div class="month-name">{{monthsOfYear[watchedMonth] | limitNameChar : limitMonthNameChar}}{{' ' + watchedYear}}</div>
+        <div class="next-btn" (click)="nextMonthBtnClicked()"> > </div>
+        <!--<div id="year">{{watchedYear}}</div>-->
+    </div>
+    <div class="calendar-header">
+        <div class="day-name" *ngFor="let day of daysOfWeek">{{day |
+            limitNameChar : limitDayNameChar}}
+        </div>
+    </div>
+
+    <div class="week-line" *ngFor="let week of month">
+        <div class="day" *ngFor="let day of week" (click)="selectDay(day)" [ngClass] = "{'today': day.todayDate, 'out-of-the-month': day.outOfTheMonth, 'selected': day.isSelected}">{{day.dayDate}}
+        <div *ngIf="week == month[3]" class="events-badge">5</div>
+        </div>
+    </div>
+
+
+</div>
